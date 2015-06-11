@@ -17,15 +17,25 @@ class AreaLevelingTest extends \PHPUnit_Framework_TestCase {
 		);		
 	}
 	
-	public function testGetMinEffort() {
+	/**
+	 * 
+	 * @param array $ground
+	 * @param int $result
+	 * @dataProvider dataProvider
+	 */
+	public function testGetMinEffort($ground, $result) {
 		$this->assertEquals(
-			2,
-			$this->areaLeveling->getMinEffort(array('10','31'))
+			$result,
+			$this->areaLeveling->getMinEffort($ground)
 		);
-		
-		$this->assertEquals(
-			7,
-			$this->areaLeveling->getMinEffort(array('54454','61551'))
+	}
+	
+	public function dataProvider() {
+		return array(
+			array(array('10', '31'), 2),
+			array(array('54454', '61551'), 7),
+			array(array('989'), 0),
+			array(array('90'), 8)
 		);
 	}
 }
